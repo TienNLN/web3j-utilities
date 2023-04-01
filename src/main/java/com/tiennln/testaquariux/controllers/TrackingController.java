@@ -2,7 +2,7 @@ package com.tiennln.testaquariux.controllers;
 
 import com.tiennln.testaquariux.dtos.responses.ResponseDTO;
 import com.tiennln.testaquariux.services.BookTickerService;
-import com.tiennln.testaquariux.services.Web3Service;
+import com.tiennln.testaquariux.services.UsersService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +20,7 @@ public class TrackingController {
 
     private BookTickerService bookTickerService;
 
-    private Web3Service web3Service;
+    private UsersService usersService;
 
     /**
      * Gets latest best aggregate.
@@ -49,18 +49,7 @@ public class TrackingController {
     @GetMapping("/balances/{address}")
     public ResponseEntity<?> ethBalance(@PathVariable String address) {
         return new ResponseEntity<>(ResponseDTO.builder()
-                .result(web3Service.getWalletBalance(address))
+                .result(usersService.getBalance(address))
                 .build(), HttpStatus.OK);
-    }
-
-    /**
-     * Gets transactions.
-     *
-     * @param address the address
-     * @return the transactions
-     */
-    @GetMapping("/transactions/{address}")
-    public ResponseEntity<?> getTransactions(@PathVariable String address) {
-        return new ResponseEntity<>(web3Service.getTransactions(address), HttpStatus.OK);
     }
 }

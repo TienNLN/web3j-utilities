@@ -1,25 +1,20 @@
 package com.tiennln.testaquariux.utils;
 
-import com.tiennln.testaquariux.TransactionType;
 import com.tiennln.testaquariux.constants.CommonConstant;
 import com.tiennln.testaquariux.constants.TokenContract;
+import com.tiennln.testaquariux.constants.enums.TransactionType;
 import com.tiennln.testaquariux.contracts.USDTContract;
 import com.tiennln.testaquariux.dtos.responses.TransactionResponse;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.catalina.core.ApplicationContext;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.web3j.contracts.eip20.generated.ERC20;
 import org.web3j.crypto.Credentials;
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.core.DefaultBlockParameterName;
-import org.web3j.protocol.core.Ethereum;
 import org.web3j.protocol.core.methods.response.EthBlock;
 import org.web3j.protocol.core.methods.response.EthGetTransactionReceipt;
-import org.web3j.protocol.core.methods.response.TransactionReceipt;
 import org.web3j.tx.FastRawTransactionManager;
 import org.web3j.tx.gas.DefaultGasProvider;
 
@@ -29,6 +24,8 @@ import java.math.BigInteger;
 import java.util.List;
 
 /**
+ * The type Web 3 util.
+ *
  * @author TienNLN on 01/04/2023
  */
 @Component
@@ -42,10 +39,23 @@ public class Web3Util {
         web3j = web3jDI;
     }
 
+    /**
+     * Gets balance from raw.
+     *
+     * @param rawBalance the raw balance
+     * @param divisor    the divisor
+     * @return the balance from raw
+     */
     public static BigDecimal getBalanceFromRaw(BigInteger rawBalance, long divisor) {
         return new BigDecimal(rawBalance).divide(new BigDecimal(divisor));
     }
 
+    /**
+     * Gets usdt contract.
+     *
+     * @param walletPrivateKey the wallet private key
+     * @return the usdt contract
+     */
     public static USDTContract getUSDTContract(String walletPrivateKey) {
 
         Credentials credentials = CredentialUtil.getCredentialFromPrivateKey(walletPrivateKey);
@@ -58,6 +68,12 @@ public class Web3Util {
                 new DefaultGasProvider());
     }
 
+    /**
+     * Gets all transaction.
+     *
+     * @param address the address
+     * @return the all transaction
+     */
     @SneakyThrows
     public static List<TransactionResponse> getAllTransaction(String address) {
 
@@ -70,12 +86,12 @@ public class Web3Util {
 
         return transactions
                 .stream()
-//                .filter(transactionResult -> {
-//                    EthBlock.TransactionObject txObj = (EthBlock.TransactionObject) transactionResult.get();
-//
-//                    return (txObj.getFrom().equalsIgnoreCase(address)
-//                            || txObj.getTo().equalsIgnoreCase(address));
-//                })
+                .filter(transactionResult -> {
+                    EthBlock.TransactionObject txObj = (EthBlock.TransactionObject) transactionResult.get();
+
+                    return (txObj.getFrom().equalsIgnoreCase(address)
+                            || txObj.getTo().equalsIgnoreCase(address));
+                })
                 .map(transactionResult -> {
                     EthBlock.TransactionObject txObj = (EthBlock.TransactionObject) transactionResult.get();
 
@@ -101,7 +117,7 @@ public class Web3Util {
 
                     return TransactionResponse.builder()
                             .value(new BigDecimal(txObj.get().getValue()))
-                            .transactionType(TransactionType.TRANSFER)
+                            .transactionType(TransactionType.TRANSFER.name())
                             .fromAddress(txObj.get().getFrom())
                             .toAddress(txObj.get().getTo())
                             .token(token)
@@ -112,6 +128,13 @@ public class Web3Util {
     }
 
 
+    /**
+     * Gets fast raw transaction manager by private key.
+     *
+     * @param credentials the credentials
+     * @param privateKey  the private key
+     * @return the fast raw transaction manager by private key
+     */
     public static FastRawTransactionManager getFastRawTransactionManagerByPrivateKey(Credentials credentials, String privateKey) {
         return new FastRawTransactionManager(web3j, credentials, 1);
     }

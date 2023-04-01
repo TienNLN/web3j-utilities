@@ -16,9 +16,10 @@ public interface Web3Service {
      * Gets wallet balance.
      *
      * @param walletAddress the wallet address
+     * @param privateKey    the private key
      * @return the wallet balance
      */
-    List<WalletAssetResponse> getWalletBalance(String walletAddress);
+    List<WalletAssetResponse> getWalletBalance(String walletAddress, String privateKey);
 
     /**
      * Gets transactions.

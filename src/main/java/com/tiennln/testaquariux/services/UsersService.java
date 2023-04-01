@@ -1,5 +1,9 @@
 package com.tiennln.testaquariux.services;
 
+import com.tiennln.testaquariux.dtos.responses.WalletAssetResponse;
+
+import java.util.List;
+
 /**
  * The interface User service.
  *
@@ -14,4 +18,12 @@ public interface UsersService {
      * @return the private key by address
      */
     String getPrivateKeyByAddress(String address);
+
+    /**
+     * Gets balance.
+     *
+     * @param address the address
+     * @return the balance
+     */
+    List<WalletAssetResponse> getBalance(String address);
 }

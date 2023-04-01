@@ -9,29 +9,36 @@ import lombok.NoArgsConstructor;
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * @author TienNLN on 02/04/2023
  */
 @Entity
-@Table(name = "USERS_WALLET", schema = "PUBLIC")
+@Table(name = "WALLET_TRANSACTIONS", schema = "PUBLIC")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserWallet implements Serializable {
+public class TransactionHistory implements Serializable {
     @Serial
-    private static final long serialVersionUID = 8779561839001490084L;
+    private static final long serialVersionUID = -6944278675502560522L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "ASSET_NAME")
-    private String assetName;
+    @Column(name = "CREATED_DATE")
+    private Date createdDate;
 
-    @Column(name = "BALANCE")
-    private BigDecimal balance;
+    @Column(name = "TRADING_PAIR")
+    private String tradingPair;
+
+    @Column(name = "ACTION")
+    private String action;
+
+    @Column(name = "TRANSACTION_VALUE")
+    private BigDecimal transactionValue;
 
     @ManyToOne
     @JoinColumn(name = "USER_ID")

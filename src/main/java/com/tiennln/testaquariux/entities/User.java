@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -24,9 +25,19 @@ public class User implements Serializable {
     private static final long serialVersionUID = 5906525586761429416L;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "USER_ID")
+    private Integer id;
+
     @Column(name = "WALLET_ADDRESS", nullable = false, unique = true)
     private String walletAddress;
 
     @Column(name = "PRIVATE_KEY", nullable = false, unique = true)
     private String privateKey;
+
+    @OneToMany(mappedBy = "user")
+    private List<UserWallet> userWallets;
+
+    @OneToMany(mappedBy = "user")
+    private List<TransactionHistory> transactionHistories;
 }

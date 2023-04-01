@@ -3,7 +3,6 @@ package com.tiennln.testaquariux.services.impl;
 import com.tiennln.testaquariux.constants.CommonConstant;
 import com.tiennln.testaquariux.dtos.responses.TransactionResponse;
 import com.tiennln.testaquariux.dtos.responses.WalletAssetResponse;
-import com.tiennln.testaquariux.services.UsersService;
 import com.tiennln.testaquariux.services.Web3Service;
 import com.tiennln.testaquariux.utils.Web3Util;
 import lombok.AllArgsConstructor;
@@ -26,13 +25,9 @@ public class Web3ServiceImpl implements Web3Service {
 
     private final Web3j web3j;
 
-    private UsersService usersService;
-
     @SneakyThrows
     @Override
-    public List<WalletAssetResponse> getWalletBalance(String walletAddress) {
-
-        var privateKey = usersService.getPrivateKeyByAddress(walletAddress);
+    public List<WalletAssetResponse> getWalletBalance(String walletAddress, String privateKey) {
 
         var balanceResponse = web3j.ethGetBalance(walletAddress, DefaultBlockParameterName.LATEST)
                 .send();

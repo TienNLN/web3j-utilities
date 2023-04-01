@@ -2,6 +2,7 @@ package com.tiennln.testaquariux.controllers.advice;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tiennln.testaquariux.dtos.responses.ResponseDTO;
+import com.tiennln.testaquariux.exceptions.BaseException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -44,5 +45,13 @@ public class GlobalHandlerExceptionControllerAdvice {
     public ResponseEntity<?> handleException(HttpServletRequest request, Throwable throwable) {
         log.error(throwable.getMessage());
         return new ResponseEntity<>(ResponseDTO.internalServerError(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(value = BaseException.class)
+    public ResponseEntity<ResponseDTO> handleCustomRuntimeException(HttpServletRequest request, BaseException exception) {
+        return new ResponseEntity<>(ResponseDTO.builder()
+                .statusCode(exception.getStatusCode())
+                .message(exception.getMessage()).build(),
+                exception.getHttpStatus());
     }
 }

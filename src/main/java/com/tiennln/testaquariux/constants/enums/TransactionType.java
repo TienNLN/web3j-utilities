@@ -1,4 +1,4 @@
-package com.tiennln.testaquariux;
+package com.tiennln.testaquariux.constants.enums;
 
 /**
  * @author TienNLN on 01/04/2023

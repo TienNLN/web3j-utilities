@@ -9,11 +9,19 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 /**
+ * The type Credential util.
+ *
  * @author TienNLN on 01/04/2023
  */
 @Slf4j
 public class CredentialUtil {
 
+    /**
+     * Gets credential from private key.
+     *
+     * @param privateKey the private key
+     * @return the credential from private key
+     */
     public static Credentials getCredentialFromPrivateKey(String privateKey) {
         try {
 
@@ -28,6 +36,12 @@ public class CredentialUtil {
         return null;
     }
 
+    /**
+     * Decode private key string.
+     *
+     * @param encodedPrivateKey the encoded private key
+     * @return the string
+     */
     public static String decodePrivateKey(String encodedPrivateKey) {
         return new String(Base64.getDecoder().decode(encodedPrivateKey), StandardCharsets.UTF_8);
     }

@@ -18,4 +18,5 @@ public final class CommonConstant {
 
     public static final String ETH_SYMBOL = "ETH";
     public static final String USDT_SYMBOL = "USDT";
+    public static final String BTC_SYMBOL = "BTC";
 }

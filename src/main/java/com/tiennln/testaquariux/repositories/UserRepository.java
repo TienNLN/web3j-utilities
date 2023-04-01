@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  * @author TienNLN on 01/04/2023
  */
-public interface UserRepository extends JpaRepository<User, String> {
-
+public interface UserRepository extends JpaRepository<User, Integer> {
+    User findUserByWalletAddress(String walletAddress);
 }

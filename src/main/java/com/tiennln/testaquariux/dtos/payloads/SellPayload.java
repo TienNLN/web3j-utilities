@@ -11,16 +11,16 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
- * The type Buy payload.
+ * The type Sell payload.
  *
  * @author TienNLN on 02/04/2023
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class BuyPayload implements Serializable {
+public class SellPayload implements Serializable {
     @Serial
-    private static final long serialVersionUID = 1742510735481896781L;
+    private static final long serialVersionUID = 2672370024910322160L;
 
     private String walletAddress;
     private String privateKey;
