@@ -66,6 +66,22 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.web3j/core -->
+        <dependency>
+            <groupId>org.web3j</groupId>
+            <artifactId>core</artifactId>
+            <version>5.0.0</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.web3j/contracts -->
+        <dependency>
+            <groupId>org.web3j</groupId>
+            <artifactId>contracts</artifactId>
+            <version>5.0.0</version>
+        </dependency>
+
+
     </dependencies>
 
     <dependencyManagement>

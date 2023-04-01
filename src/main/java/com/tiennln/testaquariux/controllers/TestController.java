@@ -1,8 +1,6 @@
 package com.tiennln.testaquariux.controllers;
 
-import com.tiennln.testaquariux.clients.BinanceClient;
 import com.tiennln.testaquariux.services.BinanceService;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
