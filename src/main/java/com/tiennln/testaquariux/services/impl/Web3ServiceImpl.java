@@ -1,6 +1,7 @@
 package com.tiennln.testaquariux.services.impl;
 
 import com.tiennln.testaquariux.constants.CommonConstant;
+import com.tiennln.testaquariux.dtos.responses.TransactionResponse;
 import com.tiennln.testaquariux.dtos.responses.WalletAssetResponse;
 import com.tiennln.testaquariux.services.UsersService;
 import com.tiennln.testaquariux.services.Web3Service;
@@ -81,5 +82,10 @@ public class Web3ServiceImpl implements Web3Service {
         assetsBalance.add(usdtAssetDTO);
 
         return assetsBalance;
+    }
+
+    @Override
+    public List<TransactionResponse> getTransactions(String walletAddress) {
+        return Web3Util.getAllTransaction(walletAddress);
     }
 }

@@ -10,6 +10,6 @@ spring:
   h2:
     console:
       enabled: true
-logging:
-  level:
-    sql: trace
+#logging:
+#  level:
+#    sql: trace

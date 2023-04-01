@@ -1,5 +1,6 @@
 package com.tiennln.testaquariux.services;
 
+import com.tiennln.testaquariux.dtos.responses.TransactionResponse;
 import com.tiennln.testaquariux.dtos.responses.WalletAssetResponse;
 
 import java.util.List;
@@ -18,4 +19,12 @@ public interface Web3Service {
      * @return the wallet balance
      */
     List<WalletAssetResponse> getWalletBalance(String walletAddress);
+
+    /**
+     * Gets transactions.
+     *
+     * @param walletAddress the wallet address
+     * @return the transactions
+     */
+    List<TransactionResponse> getTransactions(String walletAddress);
 }
