@@ -98,6 +98,7 @@ public class TransactionServiceImpl implements TransactionService {
                     .transactionValue(ethValue)
                     .user(user)
                     .build());
+
         } else if (payload.getTradingPair().equalsIgnoreCase(TradingPair.BTCUSDT.name())) {
             BigDecimal bestAggregatePrice = bookTickerRepository.findById(TradingPair.BTCUSDT.name()).get().getAskPrice();
 
