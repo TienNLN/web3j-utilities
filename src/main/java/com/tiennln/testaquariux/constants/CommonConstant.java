@@ -12,5 +12,10 @@ public final class CommonConstant {
 
     public static final String ETH_RPC = "https://rpc.ankr.com/eth";
 
-    public static final long DIVIDED_NUMBER = 1000000000000000000L;
+    public static final long ETH_DIVISOR = 1000000000000000000L;
+
+    public static final long USDT_DIVISOR = 1000000L;
+
+    public static final String ETH_SYMBOL = "ETH";
+    public static final String USDT_SYMBOL = "USDT";
 }

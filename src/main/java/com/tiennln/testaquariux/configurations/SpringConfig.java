@@ -1,5 +1,6 @@
 package com.tiennln.testaquariux.configurations;
 
+import com.tiennln.testaquariux.constants.CommonConstant;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
@@ -9,6 +10,7 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.web3j.protocol.Web3j;
+import org.web3j.protocol.http.HttpService;
 
 import java.util.Collections;
 
@@ -17,15 +19,13 @@ import java.util.Collections;
  */
 @Configuration
 @EnableScheduling
-@ConditionalOnProperty(name="scheduler.enabled", matchIfMissing = true)
+@ConditionalOnProperty(name = "scheduler.enabled", matchIfMissing = true)
 @EnableAsync
 @EnableFeignClients(basePackages = "com.tiennln.testaquariux.clients")
 public class SpringConfig {
 
     @Bean
-    public MappingJackson2HttpMessageConverter convertMessage() {
-        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
-        converter.setSupportedMediaTypes(Collections.singletonList(MediaType.ALL));
-        return converter;
+    public Web3j getWeb3j() {
+        return Web3j.build(new HttpService(CommonConstant.ETH_RPC));
     }
 }
